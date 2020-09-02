@@ -21,6 +21,9 @@ const db = knex({
 app.use(express.json()); // 必要！解析request body裡的json資料
 app.use(cors()); //允許所有跨來源資源共用(CORS)
 
+
+app.get("/", (req, res) => { res.send('It is working!') })
+
 // signin，查詢使用者輸入的信箱和密碼是否符合login資料庫
 app.post("/signin", (req, res) => { signin.handleSignin(req, res, db, bcrypt) });
 
@@ -36,8 +39,8 @@ app.put("/image", (req, res) => { image.handleImage(req, res, db) });
 // imageur;，呼叫clarifai api
 app.post("/imageurl", (req, res) => { image.handleApiCall(req, res)});
 
-app.listen(3000, ()=> {
-    console.log('app is running on port 3000');
+app.listen( process.env.PORT || 3000, ()=> {
+    console.log(`app is running on port ${ process.env.PORT}`);
 });
 
 
