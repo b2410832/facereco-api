@@ -10,11 +10,9 @@ const image = require('./controllers/image.js');
 
 const db = knex({
   client: 'pg',
-  connection: {
-    host : '127.0.0.1',
-    user : 'rosechen',
-    password : '',
-    database : 'facereco'
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false
   }
 });
 
